@@ -2,7 +2,9 @@ from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage, Toplevel
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\janma\Desktop\gui\build\assets\frame0")
+
+# Set ASSETS_PATH relative to the OUTPUT_PATH
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame0"
 
 class MainWindow:
     def __init__(self, root, button_callback):

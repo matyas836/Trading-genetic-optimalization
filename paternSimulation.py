@@ -3,6 +3,7 @@ import numpy as np
 import re
 import random
 import time
+import math
 import yfinance as yf
 import matplotlib.pyplot as plt
 #
@@ -201,7 +202,7 @@ class PaternsSimulation:
             if(self.checkPatern(patern,date)):
                 #
                 nextDate = self.marketData.index[i+holdCandles]
-                pnl = round((self.marketData.loc[nextDate,'Close'] - self.marketData.loc[date,'Close']) / self.marketData.loc[date,'Close'],3)
+                pnl = round((math.log(self.marketData.loc[nextDate,'Close']) - math.log(self.marketData.loc[date,'Close'])),3)
                 profit = pnl*self.fixedPositionSize
                 results.loc[len(results.index)] = [pnl*100,profit,date]
         
@@ -293,33 +294,3 @@ class PaternsSimulation:
         self.resultsdataframe = bestFitnessDF.sort_values(by='Result', ascending=False)
         return bestIndividual, bestFitness
             
-
-#main
-#data = yf.download('BTC-USD', start='2023-01-01', end='2024-01-01',interval='1h')
-#sim = PaternsSimulation(data,10000,"Profit factor",5,3,0.1,3)
-#sim.optimize()
-
-#generate colors array
-#topResult = max(sim.topFitness)
-#colorsTop = []
-
-#for element in sim.topFitness:
-#    colorsTop.append(round((element/topResult)*100,2))
-
-#topAverage = max(sim.averageGen)
-#colorsMid = []
-
-#for element in sim.averageGen:
-#    colorsMid.append(round((element/topAverage)*100,2))
-
-#x = list(range(len(sim.averageGen)))
-#plt.scatter(x,sim.averageGen, c=colorsMid, cmap='viridis',s=200)
-##plt.plot(sim.topFitness,linestyle= 'dashed',c="gray",linewidth = '2')
-#plt.scatter(x,sim.topFitness,c=colorsTop,cmap='viridis',s=200)
-#plt.plot(sim.averageGen,linestyle='dashed',c="gray",linewidth = '2')
-
-#plt.scatter(x,sim.topFitness,label='Generation top result', c=colorsTop, cmap='coolwarm')
-#plt.colorbar()
-#plt.xlabel("Generation")
-#plt.title("Average and top result of generation")
-#plt.show()

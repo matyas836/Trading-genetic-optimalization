@@ -199,7 +199,7 @@ class backTestWindow:
                         time.sleep(0.5)  # Wait for a short time to avoid busy-waiting
                         #get finished status
                         print(f"{simulation.finishedPercent*100}%")
-                        #update the progress bar, in my case it is very laggy, maybe optimize the simulation itself so it runs on multiple threads?
+                        #update the progress bar
                         if(simulation.finishedPercent > 0.15):
                             self.progress_bar.set(simulation.finishedPercent)
                         

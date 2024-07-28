@@ -13,7 +13,6 @@ def handle_button_click(button_name):
         paternFinder()
 
 
-    
 if __name__ == "__main__":
     root = Tk()
     app = MainWindow(root, handle_button_click)
